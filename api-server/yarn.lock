@@ -2073,7 +2073,7 @@ pino-std-serializers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-1.0.0.tgz#7607ab8c5b7c32bf7c4dada149da4ce3c14a3b75"
 
-pino@^4.10.4:
+pino@^4.10.4, pino@^4.13.0:
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/pino/-/pino-4.13.0.tgz#2defbc3ef9868f27d59767d44164824867516114"
   dependencies:
