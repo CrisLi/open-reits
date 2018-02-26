@@ -1,0 +1,7 @@
+{
+  "extends": "kitty",
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}
