@@ -9,8 +9,11 @@
     "nodemon": "^1.15.1"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "dotenv": "^5.0.0",
     "fastify": "^1.0.0-rc.2",
+    "fastify-plugin": "^0.2.2",
+    "mongoose": "^5.0.7",
     "pino": "^4.13.0"
   },
   "scripts": {

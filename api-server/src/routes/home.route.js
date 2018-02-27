@@ -1,5 +1,3 @@
-async function routes(fastify) {
+module.exports = async (fastify) => {
   fastify.get('/', async () => ({ server: 'reits-api-server', status: 'up' }));
-}
-
-module.exports = routes;
+};
