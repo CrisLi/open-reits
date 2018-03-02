@@ -11,13 +11,15 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "dotenv": "^5.0.0",
-    "fastify": "^1.0.0-rc.2",
+    "fastify": "^1.0.0-rc.3",
     "fastify-plugin": "^0.2.2",
+    "jest": "^22.4.2",
     "mongoose": "^5.0.7",
     "pino": "^4.13.0"
   },
   "scripts": {
     "start": "NODE_ENV=production node src/index.js",
-    "dev": "nodemon src/index.js | pino"
+    "dev": "nodemon src/index.js | pino",
+    "test": "NODE_ENV=test jest test"
   }
 }
