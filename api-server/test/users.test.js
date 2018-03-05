@@ -37,6 +37,7 @@ describe('users api', () => {
     expect(response.statusCode).toBe(200);
     let payload = JSON.parse(response.payload);
     expect(payload['token']).toBeDefined();
+    expect(payload.password).toBeUndefined();
     testUser1.token = payload.token;
 
     response = await process.app.inject({
@@ -47,6 +48,7 @@ describe('users api', () => {
     expect(response.statusCode).toBe(200);
     payload = JSON.parse(response.payload);
     expect(payload['token']).toBeDefined();
+    expect(payload.password).toBeUndefined();
     testUser2.token2 = payload.token;
   });
 
@@ -92,6 +94,7 @@ describe('users api', () => {
     expect(users).toHaveLength(2);
     expect(users[0]['_id']).toBeDefined();
     expect(users[0].username).toBe(testUser1.username);
+    expect(users[0].password).toBeUndefined();
   });
 
 });
