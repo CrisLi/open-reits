@@ -2,7 +2,7 @@ const fastify = require('fastify');
 const jwt = require('fastify-jwt');
 const auth = require('fastify-auth');
 const db = require('./db');
-const authMethods = require('./lib/auth-methods');
+const authDecorates = require('./lib/auth-decorates');
 const routes = require('./routes');
 
 module.exports = () => {
@@ -18,8 +18,8 @@ module.exports = () => {
     secret: process.env.JWT_SECRET || 'supersecret'
   });
   app.register(db);
-  app.register(authMethods);
   app.register(auth);
+  app.register(authDecorates);
   app.register(routes);
 
   return app;

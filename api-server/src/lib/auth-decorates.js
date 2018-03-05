@@ -7,7 +7,7 @@ module.exports = fp(async (fastify) => {
     request.jwtVerify(done);
   });
 
-  fastify.decorate('verifyUsernameAndPassword', (request, reply, done) => {
+  fastify.decorate('verifyUserAndPassword', (request, reply, done) => {
     const { User } = fastify.models;
     const { username, password, org } = request.body;
     User.find().findByUsername(username, org)
@@ -20,4 +20,9 @@ module.exports = fp(async (fastify) => {
       })
       .catch((err) => done(err));
   });
+
+  fastify.decorate('jwtAuth', fastify.auth([fastify.verifyJwt]));
+
+  fastify.decorate('userAndPasswordAuth', fastify.auth([fastify.verifyUserAndPassword]));
+
 });

@@ -42,9 +42,9 @@ module.exports = async (fastify) => {
 
   const { User } = fastify.models;
 
-  fastify.get('/', async () => (User.find({})));
+  fastify.get('/', { beforeHandler: fastify.jwtAuth }, async () => (User.find({})));
 
-  fastify.get('/me', { beforeHandler: fastify.auth([fastify.verifyJwt]) }, async (request) => {
+  fastify.get('/me', { beforeHandler: fastify.jwtAuth }, async (request) => {
     const { user } = request;
     return User.findById(user['_id']);
   });

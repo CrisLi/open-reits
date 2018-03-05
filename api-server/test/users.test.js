@@ -82,7 +82,10 @@ describe('users api', () => {
   test('GET `/users`', async () => {
     const response = await process.app.inject({
       method: 'GET',
-      url: '/users'
+      url: '/users',
+      headers: {
+        Authorization: `Bearer ${testUser1.token}`
+      }
     });
     expect(response.statusCode).toBe(200);
     const users = JSON.parse(response.payload);
