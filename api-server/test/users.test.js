@@ -35,6 +35,9 @@ describe('users api', () => {
       payload: testUser1
     });
     expect(response.statusCode).toBe(200);
+    let payload = JSON.parse(response.payload);
+    expect(payload['token']).toBeDefined();
+    this.token1 = payload.token;
 
     response = await process.app.inject({
       method: 'POST',
@@ -42,6 +45,9 @@ describe('users api', () => {
       payload: testUser2
     });
     expect(response.statusCode).toBe(200);
+    payload = JSON.parse(response.payload);
+    expect(payload['token']).toBeDefined();
+    this.token2 = payload.token;
   });
 
   test('POST `/auth` 401', async () => {

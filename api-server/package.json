@@ -12,9 +12,11 @@
     "bcrypt": "^1.0.3",
     "dotenv": "^5.0.0",
     "fastify": "^1.0.0-rc.3",
+    "fastify-auth": "^0.2.0",
     "fastify-jwt": "^0.2.1",
     "fastify-plugin": "^0.2.2",
     "jest": "^22.4.2",
+    "lodash": "^4.17.5",
     "mongoose": "^5.0.7",
     "pino": "^4.13.0"
   },

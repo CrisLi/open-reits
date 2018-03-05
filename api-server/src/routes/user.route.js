@@ -44,6 +44,8 @@ module.exports = async (fastify) => {
 
   fastify.get('/', async () => (User.find({})));
 
+  fastify.get('/me', async () => (User.find({})));
+
   fastify.post('/', postOpts, async (request) => {
     const user = new User(request.body);
     try {

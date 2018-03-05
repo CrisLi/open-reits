@@ -1,4 +1,7 @@
 const ApiError = require('../lib/api-error');
+const { pick } = require('lodash');
+
+const jwtPayloadFields = ['_id', 'username', 'org', 'roles'];
 
 module.exports = async (fastify) => {
 
@@ -9,7 +12,8 @@ module.exports = async (fastify) => {
     const user = await User.find().findByUsername(username, org);
 
     if (user && user.comparePassword(password)) {
-      return { token: 'a token' };
+      const token = fastify.jwt.sign(pick(user, jwtPayloadFields));
+      return { token };
     }
 
     throw new ApiError('Invalid username or password', 401);

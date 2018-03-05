@@ -1399,6 +1399,13 @@ fastfall@^1.5.0:
   dependencies:
     reusify "^1.0.0"
 
+fastify-auth@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/fastify-auth/-/fastify-auth-0.2.0.tgz#a1220108751a59f976bcb0d5bb373b101042391f"
+  dependencies:
+    fastify-plugin "^0.2.0"
+    reusify "^1.0.4"
+
 fastify-jwt@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/fastify-jwt/-/fastify-jwt-0.2.1.tgz#ae485ce32b68408f742ca7f2c7fb705c744de0a6"
@@ -1407,7 +1414,7 @@ fastify-jwt@^0.2.1:
     jsonwebtoken "^8.1.0"
     steed "^1.1.3"
 
-fastify-plugin@^0.2.1, fastify-plugin@^0.2.2:
+fastify-plugin@^0.2.0, fastify-plugin@^0.2.1, fastify-plugin@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-0.2.2.tgz#e01b67685fd02e87edc98670ce2acfe251a2c715"
   dependencies:
@@ -2803,7 +2810,7 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
 
-lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.3.0:
+lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -3780,7 +3787,7 @@ ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
 
-reusify@^1.0.0, reusify@^1.0.2:
+reusify@^1.0.0, reusify@^1.0.2, reusify@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
 
