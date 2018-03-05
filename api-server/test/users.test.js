@@ -1,13 +1,20 @@
-
 describe('users api', () => {
 
-  const testUser = { username: 'tester', password: '123456' };
+  const testUser1 = { username: 'tester1', password: '123456' };
+  const testUser2 = { username: 'tester2', password: '123456', org: 'client' };
 
   test('POST `/users`', async () => {
-    const response = await process.app.inject({
+    let response = await process.app.inject({
       method: 'POST',
       url: '/users',
-      payload: testUser
+      payload: testUser1
+    });
+    expect(response.statusCode).toBe(200);
+
+    response = await process.app.inject({
+      method: 'POST',
+      url: '/users',
+      payload: testUser2
     });
     expect(response.statusCode).toBe(200);
   });
@@ -16,9 +23,34 @@ describe('users api', () => {
     const response = await process.app.inject({
       method: 'POST',
       url: '/users',
-      payload: testUser
+      payload: testUser1
     });
     expect(response.statusCode).toBe(409);
+  });
+
+  test('POST `/auth`', async () => {
+    let response = await process.app.inject({
+      method: 'POST',
+      url: '/auth',
+      payload: testUser1
+    });
+    expect(response.statusCode).toBe(200);
+
+    response = await process.app.inject({
+      method: 'POST',
+      url: '/auth',
+      payload: testUser2
+    });
+    expect(response.statusCode).toBe(200);
+  });
+
+  test('POST `/auth` 401', async () => {
+    const response = await process.app.inject({
+      method: 'POST',
+      url: '/auth',
+      payload: { username: testUser1.username, password: 'abcdef' }
+    });
+    expect(response.statusCode).toBe(401);
   });
 
   test('GET `/users`', async () => {
@@ -28,9 +60,9 @@ describe('users api', () => {
     });
     expect(response.statusCode).toBe(200);
     const users = JSON.parse(response.payload);
-    expect(users).toHaveLength(1);
+    expect(users).toHaveLength(2);
     expect(users[0]['_id']).toBeDefined();
-    expect(users[0].username).toBe(testUser.username);
+    expect(users[0].username).toBe(testUser1.username);
   });
 
 });

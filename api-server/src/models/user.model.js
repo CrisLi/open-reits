@@ -35,20 +35,10 @@ const userSchema = mongoose.Schema(user, { timestamps: true })
     this.identifier = Buffer.from(`${this.username}@${this.org}`).toString('base64');
     next();
   })
-  .post('save', (err, doc, next) => {
-    if (err.code === 11000) {
-      const error = new Error();
-      error.statusCode = 409;
-      error.message = 'Username is duplciated in the organization.';
-      next(error);
-    } else {
-      next(err);
-    }
-  })
   .index({ org: 1, username: 1 });
 
 userSchema.query.findByUsername = function(username, org = 'None') {
-  return this.find({ username, org });
+  return this.findOne({ username, org }).select('+password');
 };
 
 userSchema.methods.comparePassword = function(plainPassword) {

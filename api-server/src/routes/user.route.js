@@ -1,3 +1,5 @@
+const ApiError = require('../lib/api-error');
+
 const postOpts = {
   schema: {
     body: {
@@ -44,7 +46,14 @@ module.exports = async (fastify) => {
 
   fastify.post('/', postOpts, async (request) => {
     const user = new User(request.body);
-    await user.save();
+    try {
+      await user.save();
+    } catch (err) {
+      if (err.code === 11000) {
+        throw new ApiError('Username is duplciated in the organization.', 409);
+      }
+      throw err;
+    }
     return user;
   });
 
