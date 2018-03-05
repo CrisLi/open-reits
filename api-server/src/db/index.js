@@ -1,4 +1,4 @@
-const fastifyPlugin = require('fastify-plugin');
+const fp = require('fastify-plugin');
 const mongoose = require('mongoose');
 const models = require('../models');
 
@@ -13,4 +13,4 @@ async function mongoosePlugin(fastify) {
   });
 }
 
-module.exports = fastifyPlugin(mongoosePlugin);
+module.exports = fp(mongoosePlugin);

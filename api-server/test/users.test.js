@@ -37,7 +37,7 @@ describe('users api', () => {
     expect(response.statusCode).toBe(200);
     let payload = JSON.parse(response.payload);
     expect(payload['token']).toBeDefined();
-    this.token1 = payload.token;
+    testUser1.token = payload.token;
 
     response = await process.app.inject({
       method: 'POST',
@@ -47,7 +47,7 @@ describe('users api', () => {
     expect(response.statusCode).toBe(200);
     payload = JSON.parse(response.payload);
     expect(payload['token']).toBeDefined();
-    this.token2 = payload.token;
+    testUser2.token2 = payload.token;
   });
 
   test('POST `/auth` 401', async () => {
@@ -55,6 +55,26 @@ describe('users api', () => {
       method: 'POST',
       url: '/auth',
       payload: { username: testUser1.username, password: 'abcdef' }
+    });
+    expect(response.statusCode).toBe(401);
+  });
+
+  test('GET `/users/me`', async () => {
+    let response = await process.app.inject({
+      method: 'GET',
+      url: '/users/me',
+      headers: {
+        Authorization: `Bearer ${testUser1.token}`
+      }
+    });
+    expect(response.statusCode).toBe(200);
+    const user = JSON.parse(response.payload);
+    expect(user['_id']).toBeDefined();
+    expect(user.username).toBe(testUser1.username);
+
+    response = await process.app.inject({
+      method: 'GET',
+      url: '/users/me'
     });
     expect(response.statusCode).toBe(401);
   });

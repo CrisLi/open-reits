@@ -44,7 +44,10 @@ module.exports = async (fastify) => {
 
   fastify.get('/', async () => (User.find({})));
 
-  fastify.get('/me', async () => (User.find({})));
+  fastify.get('/me', { beforeHandler: fastify.auth([fastify.verifyJwt]) }, async (request) => {
+    const { user } = request;
+    return User.findById(user['_id']);
+  });
 
   fastify.post('/', postOpts, async (request) => {
     const user = new User(request.body);
