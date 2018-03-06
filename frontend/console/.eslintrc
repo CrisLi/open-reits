@@ -1,0 +1,13 @@
+{
+  "extends": "kitty",
+  "rules": {
+    "react/react-in-jsx-scope": [0],
+    "jsx-a11y/anchor-is-valid": [0]
+  },
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}
