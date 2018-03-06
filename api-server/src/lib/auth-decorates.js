@@ -7,18 +7,15 @@ module.exports = fp(async (fastify) => {
     request.jwtVerify(done);
   });
 
-  fastify.decorate('verifyUserAndPassword', (request, reply, done) => {
+  fastify.decorate('verifyUserAndPassword', async (request) => {
     const { User } = fastify.models;
     const { username, password, org } = request.body;
-    User.find().findByUsername(username, org)
-      .then((user) => {
-        if (user && user.comparePassword(password)) {
-          request.user = user;
-          done();
-        }
-        throw new ApiError('Invalid username or password', 401);
-      })
-      .catch((err) => done(err));
+    const user = await User.find().findByUsername(username, org);
+    if (user && user.comparePassword(password)) {
+      request.user = user;
+      return user;
+    }
+    throw new ApiError('Invalid username or password', 401);
   });
 
   fastify.decorate('jwtAuth', fastify.auth([fastify.verifyJwt]));
