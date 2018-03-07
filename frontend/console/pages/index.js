@@ -1,3 +1,10 @@
+import { Button } from 'antd';
+import Layout from '../components/layout';
+
 export default () => {
-  return <div>hello</div>;
+  return (
+    <Layout>
+      <Button type="primary">hello</Button>
+    </Layout>
+  );
 };
