@@ -1,0 +1,9 @@
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+
+const FormItem = Form.Item;
+
+export { default as FormField } from './form-field';
+export { Form };
+export { Input };
+export { FormItem };
