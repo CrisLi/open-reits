@@ -1,6 +1,7 @@
 const fastify = require('fastify');
 const jwt = require('fastify-jwt');
 const auth = require('fastify-auth');
+const cors = require('cors');
 const db = require('./db');
 const authDecorates = require('./lib/auth-decorates');
 const routes = require('./routes');
@@ -14,6 +15,7 @@ module.exports = () => {
     }
   });
 
+  app.use(cors());
   app.register(jwt, {
     secret: process.env.JWT_SECRET || 'supersecret'
   });
