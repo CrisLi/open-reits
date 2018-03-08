@@ -7,12 +7,17 @@
   "rules": {
     "react/react-in-jsx-scope": [0],
     "jsx-a11y/anchor-is-valid": [0],
-    "react/no-did-mount-set-state": [0]
+    "react/no-did-mount-set-state": [0],
+    "react/no-danger": [0],
+    "no-underscore-dangle": [0]
   },
   "parser": "babel-eslint",
   "settings": {
     "import/resolver": {
       "babel-module": {}
     }
+  },
+  "globals": {
+    "__ENV__": true
   }
 }

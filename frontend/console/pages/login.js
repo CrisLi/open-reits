@@ -21,7 +21,6 @@ const Login = ({ error, setError, setLoading, loading, auth }) => {
       setLoading(true);
       await auth.login(values);
     } catch (e) {
-      console.log(e.response);
       setError(e.message);
       setLoading(false);
     }

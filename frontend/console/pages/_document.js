@@ -1,4 +1,5 @@
 import Document, { Head, Main, NextScript } from 'next/document';
+import htmlescape from 'htmlescape';
 import flush from 'styled-jsx/server';
 import enUS from 'antd/lib/locale-provider/en_US';
 import { LocaleProvider } from 'antd';
@@ -23,6 +24,7 @@ export default class MyDocument extends Document {
           <LocaleProvider locale={enUS}>
             <Main />
           </LocaleProvider>
+          <script dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape(process.env)}` }} />
           <NextScript />
         </body>
       </html>

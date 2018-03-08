@@ -1,0 +1,6 @@
+{
+  "env": {
+    "DB_URL": "mongodb://reits:123456@ds056789.mlab.com:56789/reits"
+  },
+  "alias": "reits-api"
+}
