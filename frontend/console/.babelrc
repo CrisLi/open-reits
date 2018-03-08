@@ -17,6 +17,7 @@
           "lib": "./lib"
         }
       }
-    ]
+    ],
+    ["transform-define", "./env-config.js"]
   ]
 }

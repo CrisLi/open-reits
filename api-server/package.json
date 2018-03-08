@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "cors": "^2.8.4",
     "dotenv": "^5.0.0",
     "fastify": "^1.0.0-rc.3",
     "fastify-auth": "^0.2.0",
