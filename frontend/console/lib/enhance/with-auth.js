@@ -1,6 +1,6 @@
 import { compose, lifecycle, branch, renderNothing } from 'recompose';
 import Router from 'next/router';
-import { isAuth, getUser } from './auth';
+import { isAuth, getUser } from '../auth';
 
 export default compose(
   lifecycle({

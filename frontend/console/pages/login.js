@@ -1,7 +1,20 @@
 import { Row, Col, Card, Alert, Spin } from 'antd';
+import { withHandlers, compose } from 'recompose';
 import '../styles/index.less';
 import LoginForm from '../components/login-form';
-import withApi from '../lib/with-api';
+import withEnhance from '../lib/enhance';
+
+const withLoginHandler = withHandlers({
+  handleLogin: ({ setLoading, setError, login }) => async (values) => {
+    try {
+      setLoading(true);
+      await login(values);
+    } catch (e) {
+      setError(e.message);
+      setLoading(false);
+    }
+  }
+});
 
 const LoginError = ({ error }) => {
   if (!error) {
@@ -14,32 +27,22 @@ const LoginError = ({ error }) => {
   );
 };
 
-const Login = ({ error, setError, setLoading, loading, auth }) => {
+const Login = ({ error, handleLogin, loading }) => (
+  <Row>
+    <Col span={6} offset={9}>
+      <div className="login-wrapper">
+        <Spin spinning={loading}>
+          <Card title="Login">
+            <LoginError error={error} />
+            <LoginForm onSubmit={handleLogin} />
+          </Card>
+        </Spin>
+      </div>
+    </Col>
+  </Row>
+);
 
-  const handleLogin = async (values) => {
-    try {
-      setLoading(true);
-      await auth.login(values);
-    } catch (e) {
-      setError(e.message);
-      setLoading(false);
-    }
-  };
-
-  return (
-    <Row>
-      <Col span={6} offset={9}>
-        <div className="login-wrapper">
-          <Spin spinning={loading}>
-            <Card title="Login">
-              <LoginError error={error} />
-              <LoginForm onSubmit={handleLogin} />
-            </Card>
-          </Spin>
-        </div>
-      </Col>
-    </Row>
-  );
-};
-
-export default withApi(Login);
+export default compose(
+  withEnhance({ requireAuth: false }),
+  withLoginHandler
+)(Login);
