@@ -29,7 +29,7 @@ const LoginError = ({ error }) => {
 
 const Login = ({ error, handleLogin, loading }) => (
   <Row>
-    <Col span={6} offset={9}>
+    <Col sm={{ span: 20, offset: 2 }} md={{ span: 6, offset: 9 }}>
       <div className="login-wrapper">
         <Spin spinning={loading}>
           <Card title="Login">

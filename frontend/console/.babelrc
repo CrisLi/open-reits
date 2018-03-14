@@ -17,6 +17,12 @@
           "lib": "./lib"
         }
       }
+    ],
+    [
+      "lodash",
+      {
+        "id": ["lodash", "recompose"]
+      }
     ]
   ]
 }

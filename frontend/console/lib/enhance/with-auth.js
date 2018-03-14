@@ -6,14 +6,14 @@ export default compose(
   lifecycle({
     componentDidMount() {
       if (isAuth()) {
-        this.setState({ currnetUser: getUser() });
+        this.setState({ currentUser: getUser() });
       } else {
         Router.replace('/login');
       }
     }
   }),
   branch(
-    ({ currnetUser }) => !currnetUser,
+    ({ currentUser }) => !currentUser,
     renderNothing
   )
 );
