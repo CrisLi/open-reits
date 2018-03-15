@@ -8,6 +8,49 @@ Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
+const menus = [
+  {
+    key: '/',
+    isRoot: true,
+    label: 'Home'
+  },
+  {
+    key: '/projects',
+    label: 'Projects'
+  },
+  {
+    key: '/accounts',
+    label: 'Account'
+  },
+  {
+    key: '/users',
+    label: 'Users'
+  }
+];
+
+const Menus = ({ handleClick, pathname }) => {
+
+  const selecteKey = menus
+    .filter(({ isRoot }) => !isRoot)
+    .map(({ key }) => key)
+    .find((key) => pathname.startsWith(key)) || '/';
+
+  return (
+    <Menu
+      mode="horizontal"
+      onClick={handleClick}
+      selectedKeys={[selecteKey]}>
+      {
+        menus.map((m) => (
+          <Menu.Item key={m.key}>
+            {m.label}
+          </Menu.Item>
+        ))
+      }
+    </Menu>
+  );
+};
+
 const Header = withRouter(({ router, username, logout }) => {
 
   const handleClick = (e) => {
@@ -33,23 +76,7 @@ const Header = withRouter(({ router, username, logout }) => {
         </Link>
       </Col>
       <Col span={20}>
-        <Menu
-          mode="horizontal"
-          onClick={handleClick}
-          selectedKeys={[router.pathname]}>
-          <Menu.Item key="/">
-            Home
-          </Menu.Item>
-          <Menu.Item key="/projects">
-            Projects
-          </Menu.Item>
-          <Menu.Item key="/accounts">
-            Account
-          </Menu.Item>
-          <Menu.Item key="/users">
-            Users
-          </Menu.Item>
-        </Menu>
+        <Menus handleClick={handleClick} pathname={router.pathname} />
       </Col>
       <Col span={2}>
         <Dropdown overlay={dropdownMenus} trigger={['click']}>

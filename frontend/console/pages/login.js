@@ -21,8 +21,8 @@ const withLoginHandler = compose(
 );
 
 const Login = ({ error, handleLogin: login, loading }) => (
-  <Row>
-    <Col sm={{ span: 20, offset: 2 }} md={{ span: 6, offset: 9 }}>
+  <Row type="flex" justify="center">
+    <Col span={8}>
       <div className="login-wrapper">
         <Spin spinning={loading}>
           <Card title="Login">

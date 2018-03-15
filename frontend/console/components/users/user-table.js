@@ -1,40 +1,42 @@
-import { Table, Button } from 'antd';
-import Link from 'next/link';
+import { Table } from 'antd';
+import { dateTime } from '../../lib/format';
 
-const columns = [
-  {
-    title: 'Username',
-    dataIndex: 'username',
-    key: 'username',
-  },
-  {
-    title: 'Roles',
-    dataIndex: 'roles',
-    key: 'span',
-    render: (roles) => (<span>{roles.join(',')}</span>)
-  },
-  {
-    title: 'Org',
-    dataIndex: 'org',
-    key: 'org',
-  },
-  {
-    title: 'Created At',
-    dataIndex: 'createAt',
-    key: 'createAt',
-  },
-  {
-    title: ' ',
-    dataIndex: '_id',
-    key: 'action',
-    render: (id) => (
-      <span>
-        <Link href={{ pathname: '/users', query: { userId: id } }}>
-          <Button size="small">Detail</Button>
-        </Link>
-      </span>
-    )
+
+export default ({ users = [], renderActions }) => {
+
+  const columns = [
+    {
+      title: 'Username',
+      dataIndex: 'username',
+      key: 'username',
+    },
+    {
+      title: 'Roles',
+      dataIndex: 'roles',
+      key: 'span',
+      render: (roles) => (<span>{roles.join(', ')}</span>)
+    },
+    {
+      title: 'Provider',
+      dataIndex: 'org',
+      key: 'org',
+    },
+    {
+      title: 'Created At',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (time) => (dateTime(time))
+    }
+  ];
+
+  if (renderActions) {
+    columns.push({
+      title: ' ',
+      dataIndex: '_id',
+      key: 'actions',
+      render: renderActions
+    });
   }
-];
 
-export default ({ users = [] }) => <Table dataSource={users} columns={columns} rowKey="_id" />;
+  return <Table dataSource={users} columns={columns} rowKey="_id" />;
+};

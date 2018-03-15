@@ -1,7 +1,7 @@
 import { compose, withState, withHandlers, pure } from 'recompose';
 import * as api from '../api';
 
-const handleApi = ({ setLoading, setApiError }) => (options) => {
+const handleApi = ({ setLoading }) => (options) => {
   setLoading(true);
   let result;
   if (typeof options === 'string') {
@@ -16,24 +16,23 @@ const handleApi = ({ setLoading, setApiError }) => (options) => {
       return data;
     })
     .catch((e) => {
-      setApiError(e);
       setLoading(false);
+      throw e;
     });
 };
 
-const handleApiError = ({ loading, apiError, setApiError }) => (fn) => {
-  if (!loading && apiError) {
-    setApiError(null);
-    fn(apiError);
-  }
-};
+// const handleApiError = ({ loading, apiError, setApiError }) => (fn) => {
+//   if (!loading && apiError) {
+//     setApiError(null);
+//     fn(apiError);
+//   }
+// };
 
 export default compose(
   withState('loading', 'setLoading', false),
   withState('apiError', 'setApiError'),
   withHandlers({
-    handleApi,
-    handleApiError
+    handleApi
   }),
   pure
 );
