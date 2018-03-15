@@ -1,17 +1,32 @@
-import { Button } from 'antd';
+import { Card, message } from 'antd';
+import { compose, lifecycle } from 'recompose';
 import enhance from '../../lib/enhance';
+import UserTable from '../../components/users/user-table';
 
-export default enhance()(({ setLoading }) => {
-  const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
-  return (
-    <div>
-      User Pages
-      <Button onClick={handleClick}>load</Button>
-    </div>
-  );
+const withUsers = lifecycle({
+  async componentDidMount() {
+    const users = await this.props.handleApi('getUsers');
+    this.setState({
+      users
+    });
+  },
+  componentDidUpdate() {
+    const { handleApiError } = this.props;
+    handleApiError((error) => {
+      if (error.message) {
+        message.error(error.message);
+      }
+    });
+  }
 });
+
+const Users = ({ users }) => (
+  <Card>
+    <UserTable users={users} />
+  </Card>
+);
+
+export default compose(
+  enhance(),
+  withUsers
+)(Users);

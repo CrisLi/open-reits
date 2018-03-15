@@ -4,11 +4,7 @@ import Router, { withRouter } from 'next/router';
 import NProgress from 'nprogress';
 import '../../styles/index.less';
 
-Router.onRouteChangeStart = (url) => {
-  console.log(`Loading: ${url}`);
-  NProgress.start();
-};
-
+Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
@@ -69,16 +65,23 @@ const Header = withRouter(({ router, username, logout }) => {
 const Main = ({ content }) => (
   <div className="main-wrapper">
     <Row>
-      <Col span={12}>
+      <Col span={24}>
         {content}
       </Col>
     </Row>
   </div>
 );
 
+const Footer = () => (
+  <footer className="footer">
+    <div>Copyright © Chris</div>
+  </footer>
+);
+
 export default ({ children, loading = false, currentUser, logout }) => (
   <Spin spinning={loading} size="large">
     <Header username={currentUser.username} logout={logout} />
     <Main content={children} />
+    <Footer />
   </Spin>
 );
