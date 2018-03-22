@@ -1,33 +1,18 @@
 import { Row, Col, Card, Spin } from 'antd';
-import { withHandlers, withState, compose } from 'recompose';
 import '../styles/index.less';
 import LoginForm from '../components/login-form';
 import ALertError from '../components/alert-error';
-import withEnhance from '../lib/enhance';
+import withFetcher from '../lib/fetcher';
+import { login } from '../lib/auth';
 
-const handleLogin = ({ setLoading, setError, login }) => async (values) => {
-  try {
-    setLoading(true);
-    await login(values);
-  } catch (e) {
-    setError(e.message);
-    setLoading(false);
-  }
-};
-
-const withLoginHandler = compose(
-  withState('error', 'setError', null),
-  withHandlers({ handleLogin })
-);
-
-const Login = ({ error, handleLogin: login, loading }) => (
+const Login = ({ error, fetchData: handleLogin, loading }) => (
   <Row type="flex" justify="center">
     <Col span={8}>
       <div className="login-wrapper">
         <Spin spinning={loading}>
           <Card title="Login">
             <ALertError error={error} />
-            <LoginForm onSubmit={login} />
+            <LoginForm onSubmit={handleLogin} />
           </Card>
         </Spin>
       </div>
@@ -35,7 +20,7 @@ const Login = ({ error, handleLogin: login, loading }) => (
   </Row>
 );
 
-export default compose(
-  withEnhance({ requireAuth: false }),
-  withLoginHandler
-)(Login);
+export default withFetcher({
+  fetcher: (params) => login(params),
+  loading: false
+})(Login);

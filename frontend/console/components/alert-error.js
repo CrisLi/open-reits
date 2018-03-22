@@ -3,7 +3,7 @@ import { branch, renderNothing } from 'recompose';
 
 const AlertError = ({ error }) => (
   <div style={{ marginBottom: 10 }}>
-    <Alert message={error} type="error" showIcon={false} />
+    <Alert message={error.message || error} type="error" showIcon={false} />
   </div>
 );
 
