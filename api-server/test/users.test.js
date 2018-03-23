@@ -73,6 +73,7 @@ describe('users api', () => {
     const user = JSON.parse(response.payload);
     expect(user['_id']).toBeDefined();
     expect(user.username).toBe(testUser1.username);
+    expect(response.headers['x-auth-token']).toBeDefined();
 
     response = await process.app.inject({
       method: 'GET',

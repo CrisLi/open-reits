@@ -1427,9 +1427,9 @@ fastify-plugin@^0.2.0, fastify-plugin@^0.2.1, fastify-plugin@^0.2.2:
   dependencies:
     semver "^5.4.1"
 
-fastify@^1.0.0-rc.3:
-  version "1.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-1.0.0-rc.3.tgz#32ffe24260cbe7cb188bc363a9b9ba19d41aa740"
+fastify@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-1.1.1.tgz#c7768bdc7bc069a1527690dfe8f81656e03d278f"
   dependencies:
     "@types/pino" "^4.7.1"
     abstract-logging "^1.0.0"

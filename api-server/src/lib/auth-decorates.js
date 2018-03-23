@@ -1,10 +1,16 @@
 const fp = require('fastify-plugin');
 const ApiError = require('../lib/api-error');
+const signJwt = require('../lib/sign-jwt');
 
 module.exports = fp(async (fastify) => {
 
   fastify.decorate('verifyJwt', (request, reply, done) => {
-    request.jwtVerify(done);
+    request.jwtVerify((err) => {
+      if (err) return done(err);
+      const token = signJwt(fastify.jwt)(request.user);
+      reply.header('x-auth-token', token);
+      return done();
+    });
   });
 
   fastify.decorate('verifyUserAndPassword', async (request) => {

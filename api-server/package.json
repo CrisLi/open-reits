@@ -12,7 +12,7 @@
     "bcrypt": "^1.0.3",
     "cors": "^2.8.4",
     "dotenv": "^5.0.0",
-    "fastify": "^1.0.0-rc.3",
+    "fastify": "^1.1.1",
     "fastify-auth": "^0.2.0",
     "fastify-jwt": "^0.2.1",
     "fastify-plugin": "^0.2.2",
