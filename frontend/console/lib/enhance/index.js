@@ -1,30 +1,23 @@
 import { compose, withProps } from 'recompose';
 import * as auth from '../auth';
-import withApi from './with-api';
+import withFetcher from './with-fetcher';
 import withAuth from './with-auth';
 import { withLayout } from '../../components/layout';
 
 const defaultOptions = {
-  requireAuth: true
+  fetcher: {}
 };
 
 export default (options = {}) => {
   const finalOptions = { ...defaultOptions, ...options };
-  const { requireAuth } = finalOptions;
-  if (requireAuth) {
-    return compose(
-      withApi,
-      withAuth,
-      withProps(() => ({
-        logout: auth.logout
-      })),
-      withLayout
-    );
-  }
   return compose(
-    withApi,
+    withAuth,
     withProps(() => ({
-      login: auth.login
-    }))
+      logout: auth.logout
+    })),
+    withLayout,
+    withFetcher(finalOptions.fetcher)
   );
 };
+
+export { withFetcher };

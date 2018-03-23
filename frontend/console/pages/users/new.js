@@ -1,10 +1,12 @@
-import { compose, withHandlers } from 'recompose';
 import { Card, Row, Col, message } from 'antd';
 import Router from 'next/router';
 import enhance from '../../lib/enhance';
 import { UserForm } from '../../components/users';
+import * as api from '../../lib/api';
 
-const UserNew = ({ handleSubmit, handleCancel }) => (
+const handleCancel = () => Router.push('/users');
+
+const UserNew = ({ action: handleSubmit }) => (
   <Row type="flex" justify="center">
     <Col span={12}>
       <Card title="Add User">
@@ -14,17 +16,10 @@ const UserNew = ({ handleSubmit, handleCancel }) => (
   </Row>
 );
 
-export default compose(
-  enhance(),
-  withHandlers({
-    handleSubmit: ({ handleApi }) => async (values) => {
-      try {
-        await handleApi({ method: 'createUser', params: [values] });
-        message.success('Create User Success', 1, () => Router.push('/users'));
-      } catch (e) {
-        message.error(e.message);
-      }
-    },
-    handleCancel: () => () => Router.push('/users')
-  })
-)(UserNew);
+const fetcher = ({
+  action: () => (values) => api.createUser(values)
+    .then(() => message.success('Create User Success', 1, () => Router.push('/users')))
+    .catch((err) => message.error(err.message))
+});
+
+export default enhance({ fetcher })(UserNew);

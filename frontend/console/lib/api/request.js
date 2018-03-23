@@ -1,6 +1,6 @@
 import axios from 'axios';
 import env from '../env';
-import { getToken } from '../auth';
+import { getToken, setToken } from '../auth';
 
 const request = axios.create({
   baseURL: env.API_URL,
@@ -21,6 +21,9 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
+    if (response.headers['x-auth-token']) {
+      setToken(response.headers['x-auth-token']);
+    }
     if (response.data) {
       return Promise.resolve(response.data);
     }

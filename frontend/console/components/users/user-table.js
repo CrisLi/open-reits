@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import { dateTime } from '../../lib/format';
 
 
-export default ({ users = [], renderActions }) => {
+export default ({ users = [], renderActions, loading }) => {
 
   const columns = [
     {
@@ -38,5 +38,5 @@ export default ({ users = [], renderActions }) => {
     });
   }
 
-  return <Table dataSource={users} columns={columns} rowKey="_id" />;
+  return <Table dataSource={users} columns={columns} loading={loading} rowKey="_id" />;
 };

@@ -23,10 +23,17 @@ export default Form.create()(({ form, onSubmit }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FormField decorator={usernameDecorator}>
-        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+        <Input
+          prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          placeholder="Username"
+          autoComplete="off" />
       </FormField>
       <FormField decorator={passwordDecorator}>
-        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+        <Input
+          prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          type="password"
+          placeholder="Password"
+          autoComplete="off" />
       </FormField>
       <FormItem>
         <Button type="primary" htmlType="submit" style={{ width: '100%' }}>

@@ -2,10 +2,10 @@ import { Row, Col, Card, Spin } from 'antd';
 import '../styles/index.less';
 import LoginForm from '../components/login-form';
 import ALertError from '../components/alert-error';
-import withFetcher from '../lib/fetcher';
+import { withFetcher } from '../lib/enhance';
 import { login } from '../lib/auth';
 
-const Login = ({ error, fetchData: handleLogin, loading }) => (
+const Login = ({ error, action: handleLogin, loading }) => (
   <Row type="flex" justify="center">
     <Col span={8}>
       <div className="login-wrapper">
@@ -21,6 +21,5 @@ const Login = ({ error, fetchData: handleLogin, loading }) => (
 );
 
 export default withFetcher({
-  fetcher: (params) => login(params),
-  loading: false
+  action: () => (params) => login(params)
 })(Login);

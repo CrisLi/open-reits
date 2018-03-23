@@ -1,37 +1,27 @@
-import { Card, Row, Col, Button, Divider, message } from 'antd';
-import { compose, lifecycle } from 'recompose';
+import { Card, Row, Col, Button, Divider } from 'antd';
 import Link from 'next/link';
 import enhance from '../../lib/enhance';
+import * as api from '../../lib/api';
 import UserTable from '../../components/users/user-table';
+import ALertError from '../../components/alert-error';
 
-const withUsers = lifecycle({
-  async componentDidMount() {
-    try {
-      const users = await this.props.handleApi('getUsers');
-      this.setState({
-        users
-      });
-    } catch (e) {
-      message.error(e.message);
-    }
-  }
-});
-
-const Users = ({ users }) => (
+const Users = ({ data: users, loading, error }) => (
   <Row type="flex" justify="center">
     <Col span={18}>
+      <ALertError error={error} />
       <Card>
         <Link href="/users/new">
           <Button type="primary">Add User</Button>
         </Link>
         <Divider style={{ marginTop: 12, marginBottom: 12 }} />
-        <UserTable users={users} />
+        <UserTable users={users} loading={loading} />
       </Card>
     </Col>
   </Row>
 );
 
-export default compose(
-  enhance(),
-  withUsers
-)(Users);
+const fetcher = {
+  init: () => api.getUsers()
+};
+
+export default enhance({ fetcher })(Users);

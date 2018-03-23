@@ -53,16 +53,16 @@ export default Form.create()(({ form, onSubmit, onCancel }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FormField decorator={orgDecorator} label="Provider" {...formItemLayout}>
-        <Input placeholder="Provdier" />
+        <Input placeholder="Provdier" autoComplete="off" />
       </FormField>
       <FormField decorator={usernameDecorator} label="Username" {...formItemLayout}>
-        <Input placeholder="Username" />
+        <Input placeholder="Username" autoComplete="off" />
       </FormField>
       <FormField decorator={passwordDecorator} label="Password" {...formItemLayout}>
-        <Input type="password" placeholder="Password" />
+        <Input type="password" placeholder="Password" autoComplete="off" />
       </FormField>
       <FormField decorator={confirmPasswordDecorator} label="Confirm Password" {...formItemLayout}>
-        <Input type="password" placeholder="Confirm Password" />
+        <Input type="password" placeholder="Confirm Password" autoComplete="off" />
       </FormField>
       <FormField decorator={rolesDecorator} label="Roles" {...formItemLayout}>
         <Select mode="multiple" placeholder="Please select roles">
